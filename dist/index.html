@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AulaDeploy: panel de proyectos y despliegues web de DAW.">
+  <meta name="theme-color" content="#7f1726">
+  <title>AulaDeploy · Panel de despliegues DAW</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Navegación principal">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"><span>AD</span></span>
+        <span><strong>AulaDeploy</strong><small>Valle del Miro · DAW</small></span>
+      </div>
+
+      <nav class="nav-list">
+        <a href="#inicio" class="nav-link active" data-route="inicio">
+          <span class="icon" aria-hidden="true">⌂</span><span>Resumen</span>
+        </a>
+        <a href="#proyectos" class="nav-link" data-route="proyectos">
+          <span class="icon" aria-hidden="true">◇</span><span>Proyectos</span><span class="nav-count">4</span>
+        </a>
+        <a href="#solicitud" class="nav-link" data-route="solicitud">
+          <span class="icon" aria-hidden="true">↗</span><span>Nuevo despliegue</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-note">
+        <span class="pulse" aria-hidden="true"></span>
+        <div><strong>Sistema disponible</strong><small>Última comprobación: ahora</small></div>
+      </div>
+      <div class="profile">
+        <span class="avatar" aria-hidden="true">DAW</span>
+        <div><strong>Equipo de desarrollo</strong><small>Curso 2026–2027</small></div>
+      </div>
+    </aside>
+
+    <div class="main-column">
+      <header class="topbar">
+        <button class="menu-button" id="menuButton" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">☰</button>
+        <div class="environment-switch" aria-label="Entorno actual">
+          <span class="live-dot" aria-hidden="true"></span>
+          <span>Panel de control</span>
+        </div>
+        <div class="top-actions">
+          <span class="clock" id="clock" aria-label="Fecha y hora"></span>
+          <button class="icon-button" id="themeButton" type="button" aria-label="Cambiar tema" title="Cambiar tema">◐</button>
+        </div>
+      </header>
+
+      <main id="contenido">
+        <section class="view active" id="inicio" aria-labelledby="inicio-title">
+          <div class="hero section-wrap">
+            <div>
+              <p class="eyebrow">CENTRO DE OPERACIONES · DAW</p>
+              <h1 id="inicio-title">Todo preparado para el siguiente despliegue.</h1>
+              <p class="hero-copy">Supervisa proyectos, comprueba entornos y registra cada publicación desde un único panel.</p>
+              <div class="hero-actions">
+                <a class="button primary" href="#solicitud">Solicitar despliegue <span aria-hidden="true">→</span></a>
+                <a class="button secondary" href="#proyectos">Ver proyectos</a>
+              </div>
+            </div>
+            <div class="terminal" aria-label="Ejemplo de terminal de despliegue">
+              <div class="terminal-bar"><span></span><span></span><span></span><small>deploy@auladeploy</small></div>
+              <pre><code><span class="muted">$</span> git status
+<span class="success">✓ rama main actualizada</span>
+<span class="muted">$</span> npm run deploy
+<span class="gold">→ compilando proyecto…</span>
+<span class="success">✓ producción publicada</span>
+<span class="cursor">▋</span></code></pre>
+            </div>
+          </div>
+
+          <div class="section-wrap stats-grid" id="statsGrid" aria-label="Indicadores generales"></div>
+
+          <div class="section-wrap dashboard-grid">
+            <section class="panel deployments-panel" aria-labelledby="recent-title">
+              <div class="panel-heading">
+                <div><p class="eyebrow">ACTIVIDAD</p><h2 id="recent-title">Despliegues recientes</h2></div>
+                <a href="#proyectos" class="text-link">Ver todos <span aria-hidden="true">→</span></a>
+              </div>
+              <div class="deployment-list" id="recentDeployments"></div>
+            </section>
+            <aside class="panel status-panel" aria-labelledby="environment-title">
+              <div class="panel-heading"><div><p class="eyebrow">INFRAESTRUCTURA</p><h2 id="environment-title">Estado por entorno</h2></div></div>
+              <div id="environmentStatus"></div>
+              <div class="uptime-card">
+                <div><span>Disponibilidad</span><strong>99,97 %</strong></div>
+                <div class="meter"><span style="width:99.97%"></span></div>
+                <small>Últimos 30 días</small>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="view" id="proyectos" aria-labelledby="projects-title">
+          <div class="section-wrap page-heading">
+            <div><p class="eyebrow">CATÁLOGO DE APLICACIONES</p><h1 id="projects-title">Proyectos DAW</h1><p>Consulta el estado y los últimos despliegues de cada aplicación.</p></div>
+            <a class="button primary" href="#solicitud">Nuevo despliegue <span aria-hidden="true">＋</span></a>
+          </div>
+          <div class="section-wrap filters" aria-label="Filtros de proyectos">
+            <label class="search-field"><span class="sr-only">Buscar proyecto</span><span aria-hidden="true">⌕</span><input id="projectSearch" type="search" placeholder="Buscar por nombre o tecnología…"></label>
+            <label><span class="sr-only">Filtrar por entorno</span><select id="environmentFilter"><option value="todos">Todos los entornos</option><option>Desarrollo</option><option>Pruebas</option><option>Producción</option></select></label>
+            <label><span class="sr-only">Filtrar por estado</span><select id="statusFilter"><option value="todos">Todos los estados</option><option>Operativo</option><option>En pruebas</option><option>Pendiente</option><option>En mantenimiento</option><option>Con incidencias</option></select></label>
+          </div>
+          <div class="section-wrap projects-grid" id="projectsGrid"></div>
+          <p class="empty-state section-wrap" id="emptyState" hidden>No hay proyectos que coincidan con los filtros.</p>
+        </section>
+
+        <section class="view" id="solicitud" aria-labelledby="request-title">
+          <div class="section-wrap page-heading">
+            <div><p class="eyebrow">FLUJO DE PUBLICACIÓN</p><h1 id="request-title">Solicitar un despliegue</h1><p>Registra una publicación indicando el proyecto, la versión y el entorno de destino.</p></div>
+            <div class="step-badge"><span>1</span><div><small>PASO ACTUAL</small><strong>Datos del despliegue</strong></div></div>
+          </div>
+          <div class="section-wrap request-layout">
+            <form class="panel request-form" id="deploymentForm" novalidate>
+              <div class="form-section">
+                <div class="number">01</div><div><h2>Origen y destino</h2><p>Selecciona qué se va a publicar y dónde.</p></div>
+              </div>
+              <div class="field-grid">
+                <label>Proyecto<select id="projectField" name="project" required><option value="">Selecciona un proyecto</option></select><span class="field-error">Selecciona un proyecto.</span></label>
+                <label>Entorno<select name="environment" required><option value="">Selecciona un entorno</option><option>Desarrollo</option><option>Pruebas</option><option>Producción</option></select><span class="field-error">Selecciona un entorno.</span></label>
+              </div>
+              <div class="form-section separated">
+                <div class="number">02</div><div><h2>Versión</h2><p>Identifica el código que debe desplegarse.</p></div>
+              </div>
+              <div class="field-grid">
+                <label>Rama<input name="branch" value="main" placeholder="main" required pattern="[A-Za-z0-9._/-]+"><span class="field-hint">Por ejemplo: main o feature/login</span><span class="field-error">Indica una rama válida.</span></label>
+                <label>Versión<input name="version" placeholder="v1.2.0" required pattern="v?\d+\.\d+\.\d+"><span class="field-hint">Formato semántico: v1.2.0</span><span class="field-error">Usa el formato v1.2.0.</span></label>
+              </div>
+              <label class="full-field">Descripción del cambio<textarea name="description" rows="4" maxlength="240" placeholder="Resume qué cambia en esta versión…" required></textarea><span class="field-error">Describe brevemente el cambio.</span></label>
+              <label class="check-field"><input type="checkbox" name="checks" required><span>He comprobado que las pruebas finalizan correctamente y que el repositorio está actualizado.</span></label>
+              <div class="form-footer"><p><span aria-hidden="true">ⓘ</span> La solicitud quedará registrada en el historial.</p><button class="button primary" type="submit">Registrar solicitud <span aria-hidden="true">→</span></button></div>
+            </form>
+            <aside class="request-help">
+              <div class="panel checklist"><p class="eyebrow">ANTES DE CONTINUAR</p><h2>Lista de comprobación</h2><ul><li><span>✓</span> Cambios confirmados en Git</li><li><span>✓</span> Rama enviada al repositorio</li><li><span>✓</span> Pruebas superadas</li><li><span>✓</span> Versión documentada</li></ul></div>
+              <div class="help-card"><span aria-hidden="true">?</span><div><strong>¿Necesitas ayuda?</strong><p>Revisa el procedimiento de despliegue antes de publicar en producción.</p></div></div>
+            </aside>
+          </div>
+        </section>
+      </main>
+      <footer><span>AulaDeploy <b>0.1.0</b></span><span>Aplicación demostrativa · Valle del Miro · DAW</span></footer>
+    </div>
+  </div>
+
+  <div class="modal" id="projectModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+    <div class="modal-backdrop" data-close-modal></div>
+    <article class="modal-card">
+      <button class="modal-close" type="button" data-close-modal aria-label="Cerrar detalle">×</button>
+      <div id="modalContent"></div>
+    </article>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden><span>✓</span><div><strong>Solicitud registrada</strong><small>El despliegue se ha añadido al historial.</small></div></div>
+</body>
+</html>
