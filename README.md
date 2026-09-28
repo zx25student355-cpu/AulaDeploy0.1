@@ -36,3 +36,4 @@ python3 tests/smoke_test.py
 - Diseño adaptable y navegación accesible.
 
 La aplicación es demostrativa: no envía datos a un servidor ni realiza despliegues reales.
+Conexión SSH con GitHub: comprobada correctamente
